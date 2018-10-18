@@ -1,0 +1,18 @@
+/*
+Theme Name:     blankslate
+Theme URI:      http://counterswipe.com
+Description:    beta.css
+Author:         me
+Author URI:     http://counterswipe.com
+Template:       blankslate
+Version:        1.0.3
+*/
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    border: 0;
+    overflow: hidden;
+    display: block;
+}

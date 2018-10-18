@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1990 12:00:00 GMT" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=0">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">!-->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#000">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron:700" rel="stylesheet">
+  <!--<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">!-->
+  <link rel="manifest" href="\manifest.json">
+  <link rel="shortcut icon" href="\favicon.ico">
+  <link rel="apple-touch-icon" href="\images\icons\favicon.png">
+  <script type="text/javascript" src="\utils\standalone.js"></script>
+  <title>🎮</title>
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/4.12.0/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/4.12.0/firebase-auth.js"></script>
+  <script defer src="/__/firebase/4.12.0/firebase-database.js"></script>
+  <script defer src="/__/firebase/4.12.0/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/4.12.0/firebase-storage.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+  <style>
+    html,
+    body {
+      border: 0;
+      height: 100%;
+      display: block;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body {
+      background: hsla(240, 100%, 50%, 1);
+      background: -moz-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: -webkit-gradient(left bottom, right top, color-stop(0%, hsla(240, 100%, 50%, 1)), color-stop(100%, hsla(180, 100%, 50%, 1)));
+      background: -webkit-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: -o-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: -ms-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0000ff', endColorstr='#00ffff', GradientType=1);
+      font-family: sans-serif;
+      touch-action: none;
+    }
+
+    .noselect {
+      -webkit-touch-callout: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .f2 {
+      font-size: 2vh;
+      line-height: 2vh;
+    }
+
+    .f2-5 {
+      font-size: 2.5vh;
+      line-height: 2.5vh;
+    }
+
+    .f5 {
+      font-size: 5vh;
+    }
+
+    .fh5 {
+      line-height: 5vh;
+    }
+
+    .f10 {
+      font-size: 10vh;
+    }
+
+    .fh10 {
+      line-height: 10vh;
+    }
+
+    .fC {
+      display: flex;
+      justify-content: center;
+    }
+
+    .ffm {
+      font-family: 'Michroma', sans-serif;
+    }
+
+    .ffo {
+      font-family: 'Orbitron', sans-serif;
+      /*font-style: italic;*/
+    }
+
+    .fL {
+      float: left;
+    }
+
+    .fR {
+      float: right;
+    }
+
+    .fS {
+      -webkit-text-stroke: .025rem #333;
+    }
+
+    .fW {
+      color: #fff;
+      -webkit-text-fill-color: #fff;
+    }
+
+    .fx-opacity {
+      -webkit-animation: 1.5s infinite gfx-opacity;
+      animation: 1.5s infinite gfx-opacity;
+    }
+
+    .fx-pulse {
+      -webkit-animation: 5s infinite gfx-pulse;
+      animation: 5s infinite gfx-pulse;
+    }
+
+    .fx-reverse {
+      -webkit-animation-direction: reverse;
+      animation-direction: reverse;
+    }
+
+    .fx-up {
+      -webkit-animation: 1.5s infinite gfx-up;
+      animation: 1.5s infinite gfx-up;
+      /*position: absolute;
+      top: 0;*/
+    }
+
+    @-webkit-keyframes gfx-opacity {
+      0% {
+        opacity: 1;
+      }
+      90% {
+        opacity: .1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes gfx-opacity {
+      0% {
+        opacity: 1;
+      }
+      90% {
+        opacity: .1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @-webkit-keyframes gfx-pulse {
+      0% {
+        opacity: .8;
+      }
+      50% {
+        opacity: .5;
+      }
+      100% {
+        opacity: .8;
+      }
+    }
+
+    @keyframes gfx-pulse {
+      0% {
+        opacity: .8;
+      }
+      50% {
+        opacity: .5;
+      }
+      100% {
+        opacity: .8;
+      }
+    }
+
+    @-webkit-keyframes gfx-up {
+      0% {
+        -webkit-transform: translateY(5vh);
+        transform: translateY(5vh);
+      }
+      10% {
+        -webkit-transform: translateY(4.5vh);
+        transform: translateY(4.5vh);
+      }
+      20% {
+        -webkit-transform: translateY(4vh);
+        transform: translateY(4vh);
+      }
+      30% {
+        -webkit-transform: translateY(3.5vh);
+        transform: translateY(3.5vh);
+      }
+      40% {
+        -webkit-transform: translateY(3vh);
+        transform: translateY(3vh);
+      }
+      50% {
+        -webkit-transform: translateY(2.5vh);
+        transform: translateY(2.5vh);
+      }
+      60% {
+        -webkit-transform: translateY(2vh);
+        transform: translateY(2vh);
+      }
+      70% {
+        -webkit-transform: translateY(1.5vh);
+        transform: translateY(1.5vh);
+      }
+      80% {
+        -webkit-transform: translateY(1vh);
+        transform: translateY(1vh);
+      }
+      90% {
+        -webkit-transform: translateY(.5vh);
+        transform: translateY(.5vh);
+      }
+      100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes gfx-up {
+      0% {
+        -webkit-transform: translateY(5vh);
+        transform: translateY(5vh);
+      }
+      10% {
+        -webkit-transform: translateY(4.5vh);
+        transform: translateY(4.5vh);
+      }
+      20% {
+        -webkit-transform: translateY(4vh);
+        transform: translateY(4vh);
+      }
+      30% {
+        -webkit-transform: translateY(3.5vh);
+        transform: translateY(3.5vh);
+      }
+      40% {
+        -webkit-transform: translateY(3vh);
+        transform: translateY(3vh);
+      }
+      50% {
+        -webkit-transform: translateY(2.5vh);
+        transform: translateY(2.5vh);
+      }
+      60% {
+        -webkit-transform: translateY(2vh);
+        transform: translateY(2vh);
+      }
+      70% {
+        -webkit-transform: translateY(1.5vh);
+        transform: translateY(1.5vh);
+      }
+      80% {
+        -webkit-transform: translateY(1vh);
+        transform: translateY(1vh);
+      }
+      90% {
+        -webkit-transform: translateY(.5vh);
+        transform: translateY(.5vh);
+      }
+      100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+    }
+
+    .h2-5 {
+      height: 2.5vh;
+    }
+
+    .h14 {
+      height: 14vh;
+    }
+
+    .h100 {
+      height: 100vh;
+    }
+
+    .m0 {
+      -webkit-margin-before: 0;
+      -webkit-margin-after: 0;
+      -webkit-margin-start: 0;
+      -webkit-margin-end: 0;
+    }
+
+    .m60 {
+      margin: 60vh auto;
+    }
+
+    .o3 {
+      opacity: .3;
+    }
+
+    .o5 {
+      opacity: .5;
+    }
+
+    .o8 {
+      opacity: .8;
+    }
+
+    .p25 {
+      padding-top: 25vh;
+    }
+
+    .p43 {
+      padding-top: 43vh;
+    }
+
+    .p61 {
+      padding-top: 61vh;
+    }
+
+    .p64 {
+      padding-top: 64vh;
+    }
+
+    .p67 {
+      padding-top: 67vh;
+    }
+
+    .p70 {
+      padding-top: 70vh;
+    }
+
+    .p75 {
+      padding-top: 75vh;
+    }
+
+    .p80 {
+      padding-top: 80vh;
+    }
+
+    .row {
+      bottom: 0;
+      left: 0;
+      margin: 0 auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .w90 {
+      width: 90vw;
+    }
+
+    .w100 {
+      width: 100vw;
+    }
+
+    .wht {
+      background: white;
+    }
+
+    .wL {
+      width: 35vw;
+      right: 65vw;
+    }
+
+    .wR {
+      width: 55vw;
+      left: 30vw;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="noselect w100 h100">
+    <div class="row p25 w100">
+      <p class="m0 f5 fh5 ffm fS fC fW o8">LOADING</p>
+      <p class="m0 f10 fh10 ffo fC fW fx-pulse">GAME</p>
+    </div>
+    <div class="row p43 w100 fx-up">
+      <p class="m0 f10 fh5 fC fW fx-opacity">^</p>
+      <p class="m0 f10 fh5 fC fW fx-reverse fx-opacity">^</p>
+    </div>
+    <div class="m60 w90 h14 wht o3"></div>
+    <div class="row p61 wL">
+      <p class="m0 f2-5 fR o8">version |</p>
+    </div>
+    <div class="row p61 wR">
+      <div class="h2-5 wht o3"></div>
+      <p class="row p61 m0 f2-5 fC" id="v">0</p>
+    </div>
+    <div class="row p64 wL">
+      <p class="m0 f2-5 fR o8">w |</p>
+    </div>
+    <div class="row p64 wR">
+      <div class="h2-5 wht o3"></div>
+      <p class="row p64 m0 f2-5 fC" id="w">0</p>
+    </div>
+    <div class="row p67 wL">
+      <p class="m0 f2-5 fR o8">h |</p>
+    </div>
+    <div class="row p67 wR">
+      <div class="h2-5 wht o3"></div>
+      <p class="row p67 m0 f2-5 fC" id="h">0</p>
+    </div>
+    <div class="row p70 wL">
+      <p class="m0 f2-5 fR o8">ratio |</p>
+    </div>
+    <div class="row p70 wR">
+      <div class="h2-5 wht o3"></div>
+      <p class="row p70 m0 f2-5 fC" id="r">0</p>
+    </div>
+    <div class="row p75 w100">
+      <p class="m0 f2 fC o8">Mateo Navarrete | ©2018 All Rights Reserved.</p>
+    </div>
+    <div class="row p80 w100">
+      <p class="m0 f2 fC o5" id="load"></p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+      // // The Firebase SDK is initialized and available here!
+      //
+      // firebase.auth().onAuthStateChanged(user => { });
+      // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+      // firebase.messaging().requestPermission().then(() => { });
+      // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+      //
+      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+      try {
+        let app = firebase.app();
+        let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] ===
+          'function');
+        document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+      } catch (e) {
+        console.error(e);
+        document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
+      }
+    });
+    let v = 0.1;
+    document.getElementById("v").textContent = v;
+    let iw = window.innerWidth;
+    let ih = window.innerHeight;
+    document.getElementById("w").textContent = iw;
+    document.getElementById("h").textContent = ih;
+    document.getElementById("r").textContent = ih / iw;
+    let Console = console;
+    let logit = Console.log;
+    class Touches {
+      constructor() {
+        this.name = "Touches";
+        this.init();
+      }
+      init() {
+        document.addEventListener("touchmove", function (e) {
+          e.preventDefault();
+        });
+        let self = this;
+        this.setD().setL().setR().setU().setT();
+        window.t = {
+          aX: 0,
+          aY: 0,
+          zX: 0,
+          zY: 0,
+          uW: Math.round(((window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) /
+            100), 3),
+          uH: Math.round(((window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) /
+            100), 3),
+          touche: self
+        };
+        document.addEventListener("touchstart", this.tStart, false);
+        document.addEventListener("touchend", this.tEnd, false);
+      }
+      tStart(e) {
+        //console.log("@tS", e, window.t);
+        let t = window.t;
+        t.aX = e.touches[0].screenX;
+        t.aY = e.touches[0].screenY;
+      }
+      tEnd(e) {
+        //console.log("@tE", e);
+        let t = window.t;
+        t.zX = event.changedTouches[0].screenX;
+        t.zY = event.changedTouches[0].screenY;
+        Math.round((t.zX - t.aX), 3) === Math.round((t.zY - t.aY), 3) || (t.uW > Math.abs(Math.round((t.zX - t.aX),
+            3)) &&
+          t.uH > Math.abs(Math.round((t.zY - t.aY), 3))) ? t.touche.sT(e) : t.touche.sDir(t);
+      }
+      setD(fun) {
+        this.sD = fun || (() => {
+          logit("!sD");
+        });
+        return this;
+      }
+      setL(fun) {
+        this.sL = fun || (() => {
+          logit("!sL");
+        });
+        return this;
+      }
+      setR(fun) {
+        this.sR = fun || (() => {
+          logit("!sR");
+        });
+        return this;
+      }
+      setU(fun) {
+        this.sU = fun || (() => {
+          logit("!sU");
+        });
+        return this;
+      }
+      setT(fun) {
+        this.sT = fun || ((e) => {
+          logit("!sT", e, event.target.id);
+        });
+        return this;
+      }
+      sDir(t) {
+        let x = Math.round((t.zX - t.aX), 3),
+          y = Math.round((t.zY - t.aY), 3),
+          tick = "tick#"; //this.modules[this.mTicker].search(0);
+        if (Math.abs(x) >= Math.abs(y)) {
+          return x < 0 ? this.sL(tick, 1) : this.sR(tick, 3);
+        }
+        return y < 0 ? this.sU(tick, 2) : this.sD(tick, 4);
+      }
+      remove() {
+        document.removeEventListener("touchstart", this.tStart, false);
+        document.removeEventListener("touchend", this.tEnd, false);
+        delete window.t; //only 1 touch obj = ok to delete
+        //Crafty.log('Touches removed!');
+      }
+    }
+    //return Touches;
+    new Touches().
+    setD(() => logit("@touchTest", this)).
+    setR(() => logit("TODO: @login", this));//.
+    //setU(() => window.location.replace("tmp/atut/style/index.html")); //history.backBtn(false));
+  </script>
+</body>
+
+</html>

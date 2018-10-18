@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1990 12:00:00 GMT" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=0">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">!-->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#000">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="\manifest.json">
+  <script type="text/javascript" src="\utils\standalone.js?ver=1"></script>
+  <title>Welcome to Firebase Hosting</title>
+
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/4.12.0/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/4.12.0/firebase-auth.js"></script>
+  <script defer src="/__/firebase/4.12.0/firebase-database.js"></script>
+  <script defer src="/__/firebase/4.12.0/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/4.12.0/firebase-storage.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      border: 0;
+      overflow: hidden;
+      display: block;
+    }
+
+    body {
+      background: hsla(240, 100%, 50%, 1);
+      background: -moz-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: -webkit-gradient(left bottom, right top, color-stop(0%, hsla(240, 100%, 50%, 1)), color-stop(100%, hsla(180, 100%, 50%, 1)));
+      background: -webkit-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: -o-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: -ms-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0000ff', endColorstr='#00ffff', GradientType=1);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    .ico-sU {
+      -webkit-clip-path: polygon(50% 0%, 100% 100%, 90% 100%, 50% 20%, 10% 100%, 0% 100%);
+    }
+
+    .gfx-opacity {
+      -webkit-animation: 1.5s infinite fx-opacityx;
+      animation: 1.5s infinite fx-opacityx;
+    }
+
+    .gfx-rev {
+      -webkit-animation-direction: reverse;
+      animation-direction: reverse;
+    }
+
+    .box-sU {
+      -webkit-animation: 1.5s infinite fx-upx;
+      animation: 1.5s infinite fx-upx;
+      position: absolute;
+      top: 0;
+    }
+
+    .icon-sU1x,
+    .icon-sU2x {
+      -webkit-animation: 1.5s infinite fx-opacity;
+      animation: 1.5s infinite fx-opacity;
+      -webkit-clip-path: polygon(50% 0%, 100% 100%, 90% 100%, 50% 20%, 10% 100%, 0% 100%);
+      height: 5vh;
+      width: 10vh;
+    }
+
+    .icon-sU2x {
+      -webkit-animation-direction: reverse;
+      animation-direction: reverse;
+    }
+
+    .box-sUx {
+      -webkit-animation: 1.5s infinite fx-up;
+      animation: 1.5s infinite fx-up;
+      position: absolute;
+      top: 0;
+    }
+
+    .cf {
+      display: flex;
+      justify-content: center;
+    }
+
+    @-webkit-keyframes fx-up {
+      0% {
+        -webkit-transform: translateY(5vh);
+        transform: translateY(5vh);
+      }
+      100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fx-up {
+      0% {
+        -webkit-transform: translateY(5vh);
+        transform: translateY(5vh);
+      }
+      100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+    }
+
+    @-webkit-keyframes fx-opacity {
+      0% {
+        opacity: 1;
+      }
+      90% {
+        opacity: .1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes fx-opacity {
+      0% {
+        opacity: 1;
+      }
+      90% {
+        opacity: .1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @-webkit-keyframes fx-upx {
+      0% {
+        -webkit-transform: translateY(5vh);
+        transform: translateY(5vh);
+      }
+      10% {
+        -webkit-transform: translateY(4.5vh);
+        transform: translateY(4.5vh);
+      }
+      20% {
+        -webkit-transform: translateY(4vh);
+        transform: translateY(4vh);
+      }
+      30% {
+        -webkit-transform: translateY(3.5vh);
+        transform: translateY(3.5vh);
+      }
+      40% {
+        -webkit-transform: translateY(3vh);
+        transform: translateY(3vh);
+      }
+      50% {
+        -webkit-transform: translateY(2.5vh);
+        transform: translateY(2.5vh);
+      }
+      60% {
+        -webkit-transform: translateY(2vh);
+        transform: translateY(2vh);
+      }
+      70% {
+        -webkit-transform: translateY(1.5vh);
+        transform: translateY(1.5vh);
+      }
+      80% {
+        -webkit-transform: translateY(1vh);
+        transform: translateY(1vh);
+      }
+      90% {
+        -webkit-transform: translateY(.5vh);
+        transform: translateY(.5vh);
+      }
+      100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fx-upx {
+      0% {
+        -webkit-transform: translateY(5vh);
+        transform: translateY(5vh);
+      }
+      10% {
+        -webkit-transform: translateY(4.5vh);
+        transform: translateY(4.5vh);
+      }
+      20% {
+        -webkit-transform: translateY(4vh);
+        transform: translateY(4vh);
+      }
+      30% {
+        -webkit-transform: translateY(3.5vh);
+        transform: translateY(3.5vh);
+      }
+      40% {
+        -webkit-transform: translateY(3vh);
+        transform: translateY(3vh);
+      }
+      50% {
+        -webkit-transform: translateY(2.5vh);
+        transform: translateY(2.5vh);
+      }
+      60% {
+        -webkit-transform: translateY(2vh);
+        transform: translateY(2vh);
+      }
+      70% {
+        -webkit-transform: translateY(1.5vh);
+        transform: translateY(1.5vh);
+      }
+      80% {
+        -webkit-transform: translateY(1vh);
+        transform: translateY(1vh);
+      }
+      90% {
+        -webkit-transform: translateY(.5vh);
+        transform: translateY(.5vh);
+      }
+      100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+    }
+
+    @-webkit-keyframes fx-opacityx {
+      0% {
+        opacity: 1;
+      }
+      10% {
+        opacity: .9;
+      }
+      20% {
+        opacity: .8;
+      }
+      30% {
+        opacity: .7;
+      }
+      40% {
+        opacity: .6;
+      }
+      50% {
+        opacity: .5;
+      }
+      60% {
+        opacity: .4;
+      }
+      70% {
+        opacity: .3;
+      }
+      80% {
+        opacity: .2;
+      }
+      90% {
+        opacity: .1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes fx-opacityx {
+      0% {
+        opacity: 1;
+      }
+      10% {
+        opacity: .9;
+      }
+      20% {
+        opacity: .8;
+      }
+      30% {
+        opacity: .7;
+      }
+      40% {
+        opacity: .6;
+      }
+      50% {
+        opacity: .5;
+      }
+      60% {
+        opacity: .4;
+      }
+      70% {
+        opacity: .3;
+      }
+      80% {
+        opacity: .2;
+      }
+      90% {
+        opacity: .1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    #message {
+      background: white;
+      max-width: 360px;
+      margin: 100px auto 16px;
+      padding: 32px 24px;
+      border-radius: 3px;
+    }
+
+
+    #message h1 {
+      font-size: 5vh;
+      font-weight: 300;
+      /*color: rgba(255, 255, 255, 0.8);*/
+      margin: 0 0;
+      text-align: center;
+
+    }
+
+    #message h2 {
+      font-size: 8vh;
+      font-weight: 300;
+      /*color: rgba(255, 255, 255, 0.8);*/
+      margin: 0 0;
+      text-align: center;
+
+    }
+
+    #message p {
+      line-height: 140%;
+      margin: 16px 0 24px;
+      font-size: 14px;
+    }
+
+    #message a {
+      display: block;
+      text-align: center;
+      background: #00ffff;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #000000;
+      padding: 16px;
+      border-radius: 4px;
+    }
+
+    #message,
+    #message a {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+    #load {
+      color: rgba(0, 0, 0, 0.4);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .box50 {
+      width: 100vw;
+      bottom: 0;
+      left: 0;
+      margin: 0 auto;
+      position: absolute;
+      right: 0;
+      top: 50vh;
+    }
+
+    .box50 p {
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+      -webkit-margin-before: 0;
+      -webkit-margin-after: 0;
+      -webkit-margin-start: 0;
+      -webkit-margin-end: 0;
+    }
+
+    .w100w {
+      width: 100vw;
+    }
+
+    .box {
+      position: relative;
+    }
+
+    .box:before {
+      content: "";
+      display: block;
+    }
+
+    .h-5h:before {
+      padding-top: .5vh;
+    }
+
+    .row {
+      bottom: 0;
+      left: 0;
+      margin: 0 auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h1>COUNTER</h2>
+      <h2>SWIPE</h2>
+      <div class="box-sU">
+        <div class="gfx-opacity fC">^</div>
+        <div class="gfx-rev gfx-opacity fC">^</div>
+      </div>
+
+  </div>
+  <div class="box50">
+    <p class="">COUNTER</p>
+    <p class="">SWIPE</p>
+
+  </div>
+  <div class="z00 row w100w">
+    <div class="row">
+      <div class="box w100p h100h blk rndrb rndlb"></div>
+    </div>
+    <div class="box w100p h54h"></div>
+
+    <div class="box w100p h18h">
+      <div class="row ylo"></div>
+      <div class="row f10 wf size-8 o5">
+        <div class="cf">C</div>
+        <div class="cf">S</div>
+      </div>
+    </div>
+    <div class="box w100p h18h">
+      <div class="row ylo"></div>
+      <div class="row f10 wf size-8 o5">
+        <div class="row">
+          <div class="cf">^</div>
+        </div>
+        <div class="row">
+          <div class="cf">^</div>
+        </div>
+      </div>
+    </div>
+    <div class="box w100p h19h">
+      <div class="row wht-top o3"></div>
+      <div class="row pad2-5 wf cf o8">
+        <div class="">Coming Soon.</div>
+      </div>
+    </div>
+    <div class="box w100p h9h">
+      <div class="row rndrb rndlb ylo"></div>
+      <div class="row pad2-5 wf o5 cf">
+        <div class="">&#169;2018 Mateo Navarrete</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+      // // The Firebase SDK is initialized and available here!
+      //
+      // firebase.auth().onAuthStateChanged(user => { });
+      // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+      // firebase.messaging().requestPermission().then(() => { });
+      // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+      //
+      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+      try {
+        let app = firebase.app();
+        let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] ===
+          'function');
+        document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+      } catch (e) {
+        console.error(e);
+        document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
+      }
+    });
+    let Console = console;
+    let logit = Console.log;
+    class Touches {
+      constructor() {
+        this.name = "Touches";
+        this.init();
+      }
+      init() {
+        /*document.addEventListener("touchmove", function (e) {
+          e.preventDefault(); 
+        });*/
+        let self = this;
+        this.setD().setL().setR().setU().setT();
+        window.t = {
+          aX: 0,
+          aY: 0,
+          zX: 0,
+          zY: 0,
+          uW: Math.round(((window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) /
+            100), 3),
+          uH: Math.round(((window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) /
+            100), 3),
+          touche: self
+        };
+        document.addEventListener("touchstart", this.tStart, false);
+        document.addEventListener("touchend", this.tEnd, false);
+      }
+      tStart(e) {
+        //console.log("@tS", e, window.t);
+        let t = window.t;
+        t.aX = e.touches[0].screenX;
+        t.aY = e.touches[0].screenY;
+      }
+      tEnd(e) {
+        //console.log("@tE", e);
+        let t = window.t;
+        t.zX = event.changedTouches[0].screenX;
+        t.zY = event.changedTouches[0].screenY;
+        Math.round((t.zX - t.aX), 3) === Math.round((t.zY - t.aY), 3) || (t.uW > Math.abs(Math.round((t.zX - t.aX),
+            3)) &&
+          t.uH > Math.abs(Math.round((t.zY - t.aY), 3))) ? t.touche.sT(e) : t.touche.sDir(t);
+      }
+      setD(fun) {
+        this.sD = fun || (() => {
+          logit("!sD");
+        });
+        return this;
+      }
+      setL(fun) {
+        this.sL = fun || (() => {
+          logit("!sL");
+        });
+        return this;
+      }
+      setR(fun) {
+        this.sR = fun || (() => {
+          logit("!sR");
+        });
+        return this;
+      }
+      setU(fun) {
+        this.sU = fun || (() => {
+          logit("!sU");
+        });
+        return this;
+      }
+      setT(fun) {
+        this.sT = fun || ((e) => {
+          logit("!sT", e, event.target.id);
+        });
+        return this;
+      }
+      sDir(t) {
+        let x = Math.round((t.zX - t.aX), 3),
+          y = Math.round((t.zY - t.aY), 3),
+          tick = "tick#"; //this.modules[this.mTicker].search(0);
+        if (Math.abs(x) >= Math.abs(y)) {
+          return x < 0 ? this.sL(tick, 1) : this.sR(tick, 3);
+        }
+        return y < 0 ? this.sU(tick, 2) : this.sD(tick, 4);
+      }
+      remove() {
+        document.removeEventListener("touchstart", this.tStart, false);
+        document.removeEventListener("touchend", this.tEnd, false);
+        delete window.t; //only 1 touch obj = ok to delete
+        //Crafty.log('Touches removed!');
+      }
+    }
+    //return Touches;
+    new Touches().
+    setD(() => logit("@touches testes", this)).
+    setU(() => window.location.replace("tmp/atut/style/index.html")); //history.backBtn(false));
+  </script>
+</body>
+
+</html>

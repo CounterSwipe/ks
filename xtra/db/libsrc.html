@@ -1,0 +1,590 @@
+<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
+<script data-main="/wp-content/themes/blankslate-child/js/libsrcA/config" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
+<div class="z00 row w100w noselect o0" id="stats"></div>
+<div class="z01 row w100w noselect oNone js-u">
+	<div class="row" id="h-unit">
+		<div class="box w100p js-depth"></div>
+		<div class="box fL js-side"></div>
+		<div class="box w50p h32h fL">
+			<div class="row js-fx">
+				<div class="box h32h gfx-1fx fL js-width"></div>
+				<div class="box w33p h32h fL">
+					<div class="row">
+						<div class="box w100p gfx-1fx js-pad"></div>
+						<div class="box w100p h1-5h">
+							<div class="row">
+								<div class="box w8h h1-5h fC">
+									<div class="row">
+										<div class="box w1-5h h1-5h fL">
+											<div class="row js-tier2 o0">
+												<div class="row ico-star blk"></div>
+												<div class="row ico-star size-98 ylo"></div>
+											</div>
+											<div class="row js-tier3 o0">
+												<div class="row rnds gry"></div>
+												<div class="row ico-star size-7 blk"></div>
+											</div>
+											<div class="row js-tier4 o0">
+												<div class="row ico-circle size-98 ylo"></div>
+												<div class="row ico-star size-7 blk"></div>
+											</div>
+											<div class="row js-tier5 o0">
+												<div class="row rnds size-98 ylo"></div>
+												<div class="row rnds size-7 blk"></div>
+												<div class="row ico-star size-4 wht"></div>
+											</div>
+										</div>
+										<div class="box w2-5h h1-5h fL">
+											<div class="row rnds wht js-ubox"></div>
+											<div class="row kf cf f1-5">
+												<div class="js-ulevel"></div>
+											</div>
+										</div>
+										<div class="box w4h h1-5h fL">
+											<div class="row blk o5"></div>
+											<div class="row">
+												<div class="box w100p h1-5h gfx-fx fL js-resbar">
+													<div class="row mar-1 js-rescolor"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row gfx-1fx js-martop">
+						<div class="row">
+							<div class="box w8h h5h"></div>
+							<div class="box w8h h8h fC">
+								<div class="row">
+									<div class="pulseOut o0"></div>
+								</div>
+							</div>
+						</div>
+						<div class="box w20h h32h cImg o0">
+							<div class="row bg js-uPose"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z02 row w100w noselect o99" id="wall">
+	<div class="row">
+		<div class="box w100p h100h">
+			<div class="row gfx-fx js-shake" id="wall-shake">
+				<div class="row bg bgstone bg100x100"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z03 row w100w noselect o99 js-topBars">
+	<div class="box w100p h1-5h">
+		<div class="row blk o5"></div>
+		<div class="row">
+			<div class="box w50p h1-5h fL">
+				<div class="row">
+					<div class="box w100p h1-5h gfx-fx fL" id="my-topBar">
+						<div class="row blu o0"></div>
+					</div>
+				</div>
+			</div>
+			<div class="box w50p h1-5h fL">
+				<div class="row Lside">
+					<div class="box w100p h1-5h gfx-fx fL" id="foe-topBar">
+						<div class="row red o0"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z04 row w100w noselect o99 js-midBars">
+	<div class="box w100p h31-5h"></div>
+	<div class="box w100p h1-75h">
+		<div class="row blk o5"></div>
+		<div class="row">
+			<div class="box w50p h1-75h fL">
+				<div class="row">
+					<div class="box w100p h1-75h gfx-fx fL" id="my-midBar">
+						<div class="row blu o0"></div>
+					</div>
+				</div>
+			</div>
+			<div class="box w50p h1-75h fL">
+				<div class="row Lside">
+					<div class="box w100p h1-75h gfx-fx fL" id="foe-midBar">
+						<div class="row red o0"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z05 row w100w noselect o99 js-btmBars">
+	<div class="box w100p h64-75h"></div>
+	<div class="box w100p h2h">
+		<div class="row blk o5"></div>
+		<div class="row">
+			<div class="box w50p h2h fL">
+				<div class="row">
+					<div class="box w100p h2h gfx-fx fL" id="my-btmBar">
+						<div class="row blu o0"></div>
+					</div>
+				</div>
+			</div>
+			<div class="box w50p h2h fL">
+				<div class="row Lside">
+					<div class="box w100p h2h gfx-fx fL" id="foe-btmBar">
+						<div class="row red o0"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z10 row w100w noselect o99 js-top0">
+	<div class="box w100p h1-5h"></div>
+	<div class="box w100p h24h">
+		<div class="row blk-wall o0"></div>
+		<div class="row">
+			<div class="box w4p h24h fC">
+				<div class="row blk o5"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="box w50p h24h fL">
+				<div class="row">
+					<div class="box w96p h24h fL"></div>
+					<div class="box w4p h24h fL">
+						<div class="row blu o0"></div>
+					</div>
+				</div>
+			</div>
+			<div class="box w50p h24h fL">
+				<div class="row">
+					<div class="box w4p h24h fL">
+						<div class="row red o0"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box w100p h6h">
+		<div class="row blk o0"></div>
+		<div class="row">
+			<div class="box w50p h6h fL">
+				<div class="row">
+					<div class="box w90p h6h fL"></div>
+					<div class="box w10p h6h fL">
+						<div class="row ico-Ltop blu"></div>
+					</div>
+				</div>
+			</div>
+			<div class="box w50p h6h fL">
+				<div class="row">
+					<div class="box w10p h6h fL">
+						<div class="row ico-Rtop red"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z11 row w100w noselect o99 js-100">
+	<div class="row" id="u-100-cs"> </div>
+</div>
+<div class="z12 row w100w noselect o99 js-200">
+	<div class="row" id="u-200-cs"> </div>
+</div>
+<div class="z13 row w100w noselect o99 js-top3">
+	<div class="row" id="js-pasteTop3"> </div>
+</div>
+<div class="z20 row w100w noselect o99 js-mid0">
+	<div class="box w100p h33-25h"></div>
+	<div class="box w100p h25h">
+		<div class="row blk-wall o3"></div>
+		<div class="row">
+			<div class="box w6p h25h fC">
+				<div class="row blk o5"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="box w50p h25h fL">
+				<div class="row">
+					<div class="box w94p h25h fL"></div>
+					<div class="box w6p h25h fL">
+						<div class="row blu o0"></div>
+					</div>
+				</div>
+			</div>
+			<div class="box w50p h25h fL">
+				<div class="row">
+					<div class="box w6p h25h fL">
+						<div class="row red o0"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box w100p h6-5h">
+		<div class="row blk o1"></div>
+		<div class="row">
+			<div class="box w50p h6-5h fL">
+				<div class="row">
+					<div class="box w90p h6-5h fL"></div>
+					<div class="box w10p h6-5h fL">
+						<div class="row ico-Lmid blu"></div>
+					</div>
+				</div>
+			</div>
+			<div class="box w50p h6-5h fL">
+				<div class="row">
+					<div class="box w10p h6-5h fL">
+						<div class="row ico-Rmid red"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z21 row w100w noselect o99 js-110">
+	<div class="row" id="u-110-cs"> </div>
+</div>
+<div class="z22 row w100w noselect o99 js-210">
+	<div class="row" id="u-210-cs"> </div>
+</div>
+<div class="z23 row w100w noselect o99 js-mid3">
+	<div class="row" id="js-pasteMid3"> </div>
+</div>
+<div class="z30 row w100w noselect o99 js-btm0">
+	<div class="box w100p h66-75h"></div>
+	<div class="box w100p h25h">
+		<div class="row blk-wall o5"></div>
+		<div class="row">
+			<div class="box w8p h25h fC">
+				<div class="row blk o5"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="box w50p h25h fL">
+				<div class="row">
+					<div class="box w92p h25h fL"></div>
+					<div class="box w8p h25h fL">
+						<div class="row blu o0"></div>
+					</div>
+				</div>
+			</div>
+			<div class="box w50p h25h fL">
+				<div class="row">
+					<div class="box w8p h25h fL">
+						<div class="row red o0"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box w100p h8-25h">
+		<div class="row blk o3"></div>
+		<div class="row">
+			<div class="box w50p h8-25h fL">
+				<div class="row">
+					<div class="box w90p h8-25h fL"></div>
+					<div class="box w10p h8-25h fL">
+						<div class="row ico-Lbtm blu"></div>
+					</div>
+				</div>
+			</div>
+			<div class="box w50p h8-25h fL">
+				<div class="row">
+					<div class="box w10p h8-25h fL">
+						<div class="row ico-Rbtm red"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z31 row w100w noselect o99 js-120">
+	<div class="row" id="u-120-cs"> </div>
+</div>
+<div class="z32 row w100w noselect o99 js-220">
+	<div class="row" id="u-220-cs"> </div>
+</div>
+<div class="z33 row w100w noselect o99 js-btm3">
+	<div class="row" id="js-pasteBtm3"> </div>
+</div>
+<div class="z40 row w100w noselect o99 js1-gui">
+	<div class="row">
+		<div class="box w100p gfx-fx" id="h-1-a"></div>
+		<div class="box w100p h30h">
+			<div class="row">
+				<div class="box w1-5h h30h fL">
+					<div class="row">
+						<div class="row blu"></div>
+						<div class="row ylo o0 gfx-fx" id="h-1-b"></div>
+					</div>
+					<div class="row">
+						<div class="box w1-5h gfx-fx" id="h-1-c">
+							<div class="row blk"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-7 kf origin-top">100</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">90</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">80</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">70</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">60</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">50</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">40</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">30</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">20</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">10</div>
+						</div>
+					</div>
+				</div>
+				<div class="box w8h h30h fL">
+					<div class="row">
+						<div class="box w8h h10h">
+							<div class="row">
+								<div class="row wht-top rnds bor-05blk o5"> </div>
+								<div class="row bg size120 js-umug rnds Lside" id="h-11-a"></div>
+								<div class="row o0 gfx-fx" id="h-11-b">
+									<div class="row rnds bor-1blu"></div>
+									<div class="row rnds bor-1ylo o0 gfx-fx" id="h-11-c"></div>
+								</div>
+								<div class="row">
+									<div class="box w33p h2h">
+										<div class="row gry rndrbs rndlts"></div>
+										<div class="row cf f2-5 size-7 kf" id="h-11-d"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box w8h h10h">
+							<div class="row">
+								<div class="row wht-top rnds bor-05blk o5"> </div>
+								<div class="row bg size120 js-umug rnds Lside" id="h-12-a"></div>
+								<div class="row o0 gfx-fx" id="h-12-b">
+									<div class="row rnds bor-1blu"></div>
+									<div class="row rnds bor-1ylo o0 gfx-fx" id="h-12-c"></div>
+								</div>
+								<div class="row">
+									<div class="box w33p h2h">
+										<div class="row gry rndrbs rndlts"></div>
+										<div class="row cf f2-5 size-7 kf" id="h-12-d"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box w8h h10h">
+							<div class="row">
+								<div class="row wht-top rnds bor-05blk o5"> </div>
+								<div class="row bg size120 js-umug rnds Lside" id="h-13-a"></div>
+								<div class="row o0 gfx-fx" id="h-13-b">
+									<div class="row rnds bor-1blu"></div>
+									<div class="row rnds bor-1ylo o0 gfx-fx" id="h-13-c"></div>
+								</div>
+								<div class="row">
+									<div class="box w33p h2h">
+										<div class="row gry rndrbs rndlts"></div>
+										<div class="row cf f2-5 size-7 kf" id="h-13-d"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z41 row w100w noselect o99 js2-gui">
+	<div class="row">
+		<div class="box w100p gfx-fx" id="h-2-a"></div>
+		<div class="box w100p h30h">
+			<div class="row">
+				<div class="box w1-5h h30h fR">
+					<div class="row">
+						<div class="row red"></div>
+						<div class="row ylo o0 gfx-fx" id="h-2-b"></div>
+					</div>
+					<div class="row">
+						<div class="box w1-5h gfx-fx" id="h-2-c">
+							<div class="row blk"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-7 kf origin-top">100</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">90</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">80</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">70</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">60</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">50</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">40</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">30</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">20</div>
+						</div>
+						<div class="box w100p h3h">
+							<div class="row f1-50 cf size-8 kf origin-top">10</div>
+						</div>
+					</div>
+				</div>
+				<div class="box w8h h30h fR">
+					<div class="row">
+						<div class="box w8h h10h">
+							<div class="row">
+								<div class="row wht-top rnds bor-05blk o5"> </div>
+								<div class="row bg size120 js-umug rnds" id="h-21-a"></div>
+								<div class="row o0 gfx-fx" id="h-21-b">
+									<div class="row rnds bor-1red"></div>
+									<div class="row rnds bor-1ylo o0 gfx-fx" id="h-21-c"></div>
+								</div>
+								<div class="row">
+									<div class="box w33p h2h fR">
+										<div class="row gry rndrts rndlbs"></div>
+										<div class="row cf f2-5 size-7 kf" id="h-21-d"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box w8h h10h">
+							<div class="row">
+								<div class="row wht-top rnds bor-05blk o5"> </div>
+								<div class="row bg size120 js-umug rnds" id="h-22-a"></div>
+								<div class="row o0 gfx-fx" id="h-22-b">
+									<div class="row rnds bor-1red"></div>
+									<div class="row rnds bor-1ylo o0 gfx-fx" id="h-22-c"></div>
+								</div>
+								<div class="row">
+									<div class="box w33p h2h fR">
+										<div class="row gry rndrts rndlbs"></div>
+										<div class="row cf f2-5 size-7 kf" id="h-22-d"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box w8h h10h">
+							<div class="row">
+								<div class="row wht-top rnds bor-05blk o5"> </div>
+								<div class="row bg size120 js-umug rnds" id="h-23-a"></div>
+								<div class="row o0 gfx-fx" id="h-23-b">
+									<div class="row rnds bor-1red"></div>
+									<div class="row rnds bor-1ylo o0 gfx-fx" id="h-23-c"></div>
+								</div>
+								<div class="row">
+									<div class="box w33p h2h fR">
+										<div class="row gry rndrts rndlbs"></div>
+										<div class="row cf f2-5 size-7 kf" id="h-23-d"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z50 row w100w noselect o99 gfx-fx" id="fog">
+	<div class="row">
+		<div class="box w100p h100h">
+			<div class="row gfx-speed js-slide" id="fog-slide">
+				<div class="row bg bgfog bg100x100 o99"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z69 row w100w noselect o99 timer">
+	<div class="row">
+		<div class="box w33p h3h fC">
+			<div class="row wf cf">
+				<div id="h-0-t"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="z80 row w100w o0" id="splash">
+	<div class="row">
+		<div class="box w100p h100h blk rndrb rndlb"></div>
+	</div>
+	<div class="box w100p h28h"></div>
+	<div class="box w100p h7h"></div>
+	<div class="box w100p h19h"></div>
+	<div class="box w100p h18h">
+		<div class="row ylo"></div>
+		<div class="row f10 wf size-8 o5">
+			<div class="cf">COUNTER</div>
+			<div class="cf">SWIPE</div>
+		</div>
+	</div>
+	<div class="box w100p h19h">
+		<div class="row wht-top o3"></div>
+		<div class="row pad2-5 wf cf o8">
+			<div class="">Loading...</div>
+		</div>
+	</div>
+	<div class="box w100p h9h">
+		<div class="row rndrb rndlb ylo"></div>
+		<div class="row pad2-5 wf o5 cf">
+			<div class="">&#169;2017 Mateo Navarrete</div>
+		</div>
+	</div>
+</div>
+<div class="z100 row w100w" id="gpad0">
+	<div class="box w100p h100h">
+		<div class="row">
+			<div class="box w50p h8h fL" id="gpadL">
+				<div class="row wf">
+					<div class="cf" id="thischan"></div>
+				</div>
+			</div>
+			<div class="box w50p h8h fL" id="gpadR">
+				<a href="javascript:top.frames.location.reload();">
+					<div class="row"></div>
+				</a>
+			</div>
+			<div class="box w50p h92h fL" id="gpad3"></div>
+			<div class="box w50p h92h fL" id="gpad4"> </div>
+		</div>
+	</div>
+</div>

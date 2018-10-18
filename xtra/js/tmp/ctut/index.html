@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1990 12:00:00 GMT" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=0">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">!-->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#000">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="\manifest.json">
+  <script type="text/javascript" src="\utils\standalone.js?ver=1"></script>
+  <title>lodi dodi</title>
+
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/4.12.0/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/4.12.0/firebase-auth.js"></script>
+  <script defer src="/__/firebase/4.12.0/firebase-database.js"></script>
+  <script defer src="/__/firebase/4.12.0/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/4.12.0/firebase-storage.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      border: 0;
+      overflow: hidden;
+      display: block;
+    }
+
+    body {
+      background: hsla(240, 100%, 50%, 1);
+      background: -moz-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: -webkit-gradient(left bottom, right top, color-stop(0%, hsla(240, 100%, 50%, 1)), color-stop(100%, hsla(180, 100%, 50%, 1)));
+      background: -webkit-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: -o-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: -ms-linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      background: linear-gradient(45deg, hsla(240, 100%, 50%, 1) 0%, hsla(180, 100%, 50%, 1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0000ff', endColorstr='#00ffff', GradientType=1);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #message {
+      background: white;
+      max-width: 360px;
+      margin: 100px auto 16px;
+      padding: 32px 24px;
+      border-radius: 3px;
+    }
+
+
+    #message h1 {
+      font-size: 5vh;
+      font-weight: 300;
+      /*color: rgba(255, 255, 255, 0.8);*/
+      margin: 0 0;
+      text-align: center;
+
+    }
+
+    #message h2 {
+      font-size: 8vh;
+      font-weight: 300;
+      /*color: rgba(255, 255, 255, 0.8);*/
+      margin: 0 0;
+      text-align: center;
+
+    }
+
+    #message p {
+      line-height: 140%;
+      margin: 16px 0 24px;
+      font-size: 14px;
+    }
+
+    #message a {
+      display: block;
+      text-align: center;
+      background: #00ffff;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #000000;
+      padding: 16px;
+      border-radius: 4px;
+    }
+
+    #message,
+    #message a {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+    #load {
+      color: rgba(0, 0, 0, 0.4);
+      text-align: center;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="message">
+    <h1>MAIN</h2>
+      <h2>MENU</h2>
+
+      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
+      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+  </div>
+  <p id="load">Firebase SDK Loading&hellip;</p>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+      // // The Firebase SDK is initialized and available here!
+      //
+      // firebase.auth().onAuthStateChanged(user => { });
+      // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+      // firebase.messaging().requestPermission().then(() => { });
+      // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+      //
+      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+      try {
+        let app = firebase.app();
+        let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] ===
+          'function');
+        document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+      } catch (e) {
+        console.error(e);
+        document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
+      }
+    });
+
+    class Touches {
+      constructor() {
+        this.name = "Touches";
+        this.init();
+      }
+      init() {
+        /*document.addEventListener("touchmove", function (e) {
+          e.preventDefault(); 
+        });*/
+        var self = this;
+        this.setD().setL().setR().setU().setT();
+        window.t = {
+          aX: 0,
+          aY: 0,
+          zX: 0,
+          zY: 0,
+          uW: Math.round(((window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) /
+            100), 3),
+          uH: Math.round(((window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) /
+            100), 3),
+          touche: self
+        };
+        document.addEventListener("touchstart", this.tStart, false);
+        document.addEventListener("touchend", this.tEnd, false);
+      }
+      tStart(e) {
+        //console.log("@tS", e, window.t);
+        let t = window.t;
+        t.aX = e.touches[0].screenX;
+        t.aY = e.touches[0].screenY;
+      }
+      tEnd(e) {
+        //console.log("@tE", e);
+        let t = window.t;
+        t.zX = event.changedTouches[0].screenX;
+        t.zY = event.changedTouches[0].screenY;
+        Math.round((t.zX - t.aX), 3) === Math.round((t.zY - t.aY), 3) || (t.uW > Math.abs(Math.round((t.zX - t.aX),
+            3)) &&
+          t.uH > Math.abs(Math.round((t.zY - t.aY), 3))) ? t.touche.sT(e) : t.touche.sDir(t);
+      }
+      setD(fun) {
+        this.sD = fun || function () {
+          console.log("!sD");
+        };
+        return this;
+      }
+      setL(fun) {
+        this.sL = fun || function () {
+          console.log("!sL");
+        };
+        return this;
+      }
+      setR(fun) {
+        this.sR = fun || function () {
+          console.log("!sR");
+        };
+        return this;
+      }
+      setU(fun) {
+        this.sU = fun || function () {
+          console.log("!sU");
+        };
+        return this;
+      }
+      setT(fun) {
+        this.sT = fun || function (e) {
+          console.log("!sT", e, event.target.id);
+        };
+        return this;
+      }
+      sDir(t) {
+        let x = Math.round((t.zX - t.aX), 3),
+          y = Math.round((t.zY - t.aY), 3),
+          tick = "tick#"; //this.modules[this.mTicker].search(0);
+        if (Math.abs(x) >= Math.abs(y)) {
+          return x < 0 ? this.sL(tick, 1) : this.sR(tick, 3);
+        }
+        return y < 0 ? this.sU(tick, 2) : this.sD(tick, 4);
+      }
+      remove() {
+        document.removeEventListener("touchstart", this.tStart, false);
+        document.removeEventListener("touchend", this.tEnd, false);
+        delete window.t; //only 1 touch obj = ok to delete
+        //Crafty.log('Touches removed!');
+      }
+    }
+    //return Touches;
+    new Touches();//.setU(() => console.log("@touches", this));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+{
+  "short_name": "🎮",
+  "name": "🔥🎮🔥",
+  "start_url": "https://counterswipe.com/",
+  "display": "standalone",
+  "theme_color": "#000",
+  "background_color": "#000",
+  "orientation": "portrait"
+}
