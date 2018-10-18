@@ -1,0 +1,1150 @@
+CounterSwipe: ext|in+ternal mono|dia+logue
+        HUGE    ->  QUICK ->  RANGEA  ->  RANGEB  ->  MIDHUGE ->  HUGE
+@start  hi hp       hi dmg    
+@end                          hi dmg      hi dmg      hi hp|hi dmg
+hp      hi          lo        lo          lo          mid|hi
+dmg     lo          hi->lo    lo->hi      lo->hi      mid->hi
+spd     slow        fast      slow        slow        mid
+target  solo|multi  solo      multi       solo        solo
+atkType melee       melee     range       range       melee
+dmgType burst       burst     burst       dmg/time    dmg/time
+cc*     slow|stun             slow|stun|knockback
+heal*   self                  self|ally|allies        self
+def|armor|resistence|_dmg type mitigated*
+        X                                             X
+allyBuffs|foeDebuffs|self|allyDeBuffRemoval*
+        X                     X                       X
+abilities = traits
+abilities|skills|atks|moves etc =
+cooldown->chargeUp(whenUsed)->atkDur(atkSpd)->(recoveryFrames->)repeat
+
+ability req|perks
+line of sight
+aoe
+invulnerable
+teleport
+urgency
+synergy
+interrupt|parry
+cues|triggers(hp|ally|locale|score|rival|nemesis etc)
+early|mid|late game
+shield+hp
+
+overwatch:~28(melee|ult|~4skills)
+clash royale:~80(target|stats|special ability)
+mcoc:~120
+cs:~45(pri|optA|B|ult)
+//pri@0s|optA@cooldown|optB@initialCooldownCombined|ult@cooldown|reqMet('charged moved|special ability') etc
+//passive|perk cued ability(altered behavior|stats)
+//triggered via: _hp|row|@orbScore|@teamScore%|completedRowLoop etc
+//optA|B seq chosen by player @ meta
+//affects cost|time|stat bonuses etc of card
+
+emphasizers: reward(not req)game mechanics  ~50%cast
+enforcers: req game mechanics               ~10%cast
+challengers: test game mechanics            ~20%cast
+smashers: empower player                    ~20%cast
+
+perhaps:
+farming|mining|collecting|forging|crafting|upgrading mechanic
+xL Tank|Tower|Turret = delayed off|def|sup
+can have ^1 dup of each unit active @ 1x -> iow tower != tank thus 1 tower + 1 tank unit = 2 units total
+//to upgrade|switch|ult -> dragDrop on related tank|tower dragbox etc 
+xL same card = enhanced|expanded perm ability(&stat boost) //stack limit 1x per card ability
+xL same unit new card = new perm ability(&stat boost) //stack limit 1x
+@abilityL^|switch: boost in certain stat(hp|dmg|spd etc) when applied
+xL ult card = temp ability (instantaneous feel like a spell card)
+sU -> next unit(cards) // tut1:2, t2:3, t3:4.. //eventually 1v1:8u|1v1:16u|2v2:16u
+~5^7xL per unit = 20^28 cards xL / 180s = ~7s-9s xL card
+all turret tiles available @ start
+
+
+c+#   //character.traitCards //[1^15] -> ss.map[x,y] 
+c+#+w+#+base    //character[onEnter|Ready|Event|Exit] //spawn|idle|special|exhaust
+c+#+w+#+abcd    //ss.map[0,y] -> y = trait#<4? y=trait# : y=trait#-4
+c+#+w+#+ef      //""
+c+#+w+#+t+#+move+#  //character.danceMove
+@^^^ "t" -> tint>3?t=0:t=1, ss.map[0,y] -> y = tint<4? y=tint : y=tint-4
+
+//TODO: edge "triggers|cues" iow -> # doesnt trigger, instead, edges have "EDGE" [c]
+//    thus: if cell.__c["EDGE] && player# && rowset# etc -> u.addComponent("teleport")
+// also: if u.__c["ZONEONLY"] && !cell.__c["ZONE"] -> u.changeDir(X) etc
+// similarly : if u.db.orbs.length||u.__c["CARRY"] && player# && rowset# && u.dir() && cell.__c["1|2lo|hi|E|W etc"]->u.score() 
+
+model spritesheets: x4 x2players
+  cards:[0:a,1:b,2:c,3:A,4:ab,5:B,6:bc,7:C,8:ca,9:Aab,10:Aca,11:Bab,12:Bbc,13:Cbc,14:Cca]
+  //[0:A,1:B,2:Dance0,3:C,4:Dance1,5:D,6:E,7:Dance2,8:F,||9:A,10:B,11:C,12:D,13:E,14:F]
+  base: [0:onEnter|spawn, 1:idle, 2:onEvent|special, 3:onExit|exhaust]
+per rarity wardrobe (+ TINT):
+  ABCD: [0:ult0,1:ult1,2:ult2,3:ult3]
+  EF: [0:ult4,1:ult5]
+via spritesheets: x4 x2players
+bg, orbs[wht,grn,trq,prp,ylo,red,blu(aqu?potential)], vfx, etc
+//when choosing:
+pri action -> 3 choices (Pri0, Pri1, Pri2)
+alt action -> 3 choices (Alt0, Alt1, Alt2, Alt3, Alt4, Alt5)
+ult action -> 2 choices (Ult0, Ult1, Ult2, Ult3, Ult4, Ult5)
+"c + #" = ACTION CARDS
+"c + # + w + # + t + # + base|abcd|ef" = ACTIONS|GFX
+"c + # + w + # + t + # + move#" = DANCE
+
+var docData = {
+    stringExample: "Hello world!",
+    booleanExample: true,
+    numberExample: 3.14159265,
+    dateExample: new Date("December 10, 1815"),
+    arrayExample: [5, true, "hello"],
+    nullExample: null,
+    objectExample: {
+        a: 5,
+        b: {
+            nested: "foo"
+        }
+    }
+};
+
+//perhaps stats|values|behaviors = component|s ?
+  c100: [1, 6, 9], //etc iow @_uAddComps.update() -> u.addComponent(this.comps[1|6|9])... etc
+  c80: [8],
+  c50: [],
+  c20: [3],
+  vals: {}, //u.db = stats|vals etc
+  //perhaps each [c] has shared stats (ex: u.db.vals.hp) & private stas (ex: u.db.vals[c].cue) etc
+
+  //cue example: u.target = foe, if (foe.__c["50Hp"]){dmg = round(dmg * 1.5, 5)} //etc 
+  //units add(not replace!) cueLabels[80Hp:<=80%hp|50Hp:<=50%hp|20Hp<=20%hp]
+  //only removed if healed above certain 20|50|80 threshold etc
+  //own cues: ex: u = self, if (u.__c["20HP"]){ u.dmg += round(dmg * 0.8, 5)} //iow @u<20%hp, dmg increases 80%
+  //ex: ^^^[c].name = "FinalEffort", -> targeting.update() -> if (u.__c["20HP"]){ u.addUFX(20)}
+  // if u.target.hp = >20?  @[c]finalEffort.remove -> u.dmg -= round(dmg * 0.8, 5) etc
+  // u.addUFX(20) -> u.comps[c100|c80|c50|c20] = ["FinalEffort",...] etc
+  //added 1x @ <#% event? etc
+  //count|duration via fx? of ult etc?
+
+  //@target -> unit.__c["soloTarget"] ? unit.findNearestFoe(dir) : unit.findNearestFoes(dir)
+  //perhaps can only target|atk in 1 direction|direction unit is facing? etc
+
+
+Cards:
+//tower|patrol that earn energy
+//"" +1 orb bonus to units xL @zone (that can hold orbs etc)
+    //for as long alive (timed|loHp|combo|invulnerable&timed) etc
+
+mobility:
+towerFarmPotential
+patrolFarmPotential
+foePatrolFarmPotential
+tower
+Patrol
+tank
+Dmgr
+Scorer
+Stealer
+
+movement:
+LR RL
+LL RR
+ZoneTower
+ZonePatrol
+
+teleport:
+aA
+aB
+aAB...
+
+//movement&teleport per model! iow model has same teleport for all moves etc
+
+targeting:
+@foeZone: FoeAll, FoeCarry, Allies
+@comfortZone: FoeAll, FoeCarry, Allies
+(solo|inCombo)
+
+hp
+moveSpd
+solo|multi target
+atkCooldown|delay
+atkRange
+atkSpd
+atkDmg
+urgency//immediate specialAbility | onSpawn fx
+specialAbility
+specialCooldown|delay
+specialRange
+specialSpd
+specialDmg
+mindbomb//onExhaust fx
+lootDrop//onExhaust fx
+orb|s
+orb|s earn ability//foeExhuast|teleport|FoeEdgeBump
+orb|s steal //from FoeComfortZone
+comfortZoneExpansion
+resource earn rate
+
+Cues:
+score
+hp:own|ally|foe|target
+orbCarry
+foeExhausts
+zone
+
+Tier 1|2|3 cards|moves
+//multiple options for each that limit available options for next etc
+
+rdm loot boxes @60s|@120s|alliance|solo season tiers etc:
+xp
+bonus xp match wagers
+mobile msg resources etc
+rarityXp
+
+player challenge xp:
+20:draw, 5:victory -> @ draw challenge (x4 = 80draw|20victory)
+normal xp:
+10:win, 5:draw, 3:loss (x4 units)
+xp earned via characters in deck
+bonus xp earned via wardrobe
+//iow wearing rarity earns that character's rarity xp
+//req: characterXp + rarityXp => unlocks next Tier for character wardrobe
+//overall deckXp => unlocks current season week challenges tier rewards etc
+//alliance seasonXp => unlocks current alliance season week challenges tier rewards etc
+
+models:
+//earned @season|alliance season pass|pLoa
+//always as first|early rewards on free|premo pass!
+//wardrobe|dances can then be obtained via inShop|higher rewardTiers etc!
+
+wardrobe:
+rarity, tints
+//earned @season|alliance season pass
+//purchased inShop via premo
+//tints: randomized seq (tints auto include any unlocked dances)
+
+conveyance:
+rarity, tints
+//earned @season|alliance season pass
+//purchased inShop via conveyance coins
+//tints earned @lootboxes
+
+dance|farm://expressions?
+rarity
+//earned @season|alliance season pass
+//earned as segmented part of wardrobe xp tiers
+//iow if model|rarity|wardrobe dance unlocked =>
+      @ new same wardrobe tint = dance unlocked
+      @ different wardrobe = dance unlocks ability to earn xp to unlock tints
+        (iow ^+x8tiers per wardrobe !std)
+
+//TODO eventually - Not now!
+icons://emojis?
+@onEnter:onSpawn
+@onEvent:orbScore|or @onDance?
+@onExit:onExhaust
+OR @sticker msgs instead?
+rarity, tints, rotation
+//earned @season|alliance season pass
+//rotation earned @season|alliance season pass
+//tints earned @lootboxes
+
+Rarity:
+Gry std
+grn core
+trq rare
+prp alpha
+ylo omega
+
+Player:blu
+foe:red
+//scorebars, comfortZoneExpansion, hpBars
+
+Energy:aqu
+tierResource:wht|gry?
+
+
+
+perhaps stickers are like taunts?
+iow they trigger different values -> behaviors|abilities in self|allies|foes
+ex: calming -> triggers _value in allies, and _ value in foes that are aggro etcwhen threshold of calm _ value stat hits _, (various per trait), unit gets a _ boost|lowers special cooldown timer etc 
+perhaps motivation -> triggers _value in allies & traits -> can add another orb to unit once threshold is met etc -> which then triggers behvaior change if orbcarry triggers etc etc
+
+perhaps 3 values etc: ( challenge|bond|indifference )
+perhaps several types that trigger different values etc
+iow ex: unit motivates -> allies +=bond, foes w/ scarcity += challenge etc
+
+@db.decks ->
+
+Model moves all in std wardrobe! (black)
+(near1|2|3|mid1|2|3|far1|2|3|idle)
+A1,A2,A3,B1,B2,B3,C1,C2,C3,D1
+
+
+4 models:
+      Primary   Alternate   Ultimate
+shirt|Kind|Orb|Range||Orb|Range||Orb|Range|
+grn   1Blu  1   near  0   near    3 far
+blu   1Blu  2   near  1   mid     2 near
+prp   1Prp  1   far   3   far     1 close
+red   1Prp  2   far   1   mid     1 far
+    + Kind Perks(valueSetModifier)
+    + 1 Special(valueSet)//sp
+    x 3 traits(valueSets & SpecialModifier)//pri|alt|ult
+    //pri always 1|2 orbs(per color indicator etc)
+    //alt always 0|1|2|3 orbs (entire kind set represented etc)
+imgs:
+  cards|gfx
+  orbs(x9 colors)
+  conveyances
+
+BgTop
+BgBtm
+TT1|TT2|TT3|TT4
+
+@BgTop: @s(U|R|D|L|R) -> mext|prev action(card)set
+  //swipeStart gfx: cards on top start to lower & cards behind start to show
+  //cancel gfx: cards reset
+
+@TT1|TT2|TT3|TT4: Drag+Drop cards -> deploy action(card)
+  //dragStart gfx: cards raise, pinL|R+pinBox
+  //cancel gfx|tx: cards reset & vNote
+  //energy low gfx|tx: ebar|ebox flashes red & vNote
+  //area occupied gfx|tx: vNote
+
+cooldown after deploy -> 
+  //gfx: cardScreen y+|h-
+  //gfx: costBoxScreen alpha 1|0
+
+  
+  //[ ]2P INPUTS, VALID
+  //[ ]2P hub|msgQ -> #G.valid -> active
+  //[ ]2P #G selecting (continue)
+  //[ ]2P #CELL.vacant selecting -> (continue)
+  //[ ]1P #G.deploy -> sendMsg|hub -> spawn
+  //[ ]2P #G.deploy -> spawn
+  //[ ]2P #G unselected -> (continue)
+  //[ ]1P #G discard -> render
+  //[ ]2P #G discard -> (continue)
+
+eBar gfx
+energy deploy adj
+
+spawn
+deck conveyance #
+spawn conveyance #
+
+2P deploy
+2P spawn
+2P eng adj
+AI deploy
+
+spawn, orbs, values, sticker, gfx
+movement|bump, portal, score,
+combat, foeAI, victory, reqsXP
+
+
+t1: R|L a^A a^B 2|4
+t2: "" L|R a^A 3|6
+t2: "" a^B 4|8
+pvp: "" a^A|B... 5|10
+@ploa#: L|R|L|R a^A a^B a^A|B...
+
+player option -> victory pose (on a per wardrobe basis?)
+iow std:1, core:1+1:2, rare:2+2:4, alpha:4+2:6, omega:6+3:9
+//std:0, core:10+#, rare:20+#, alpha:30+#, omega:40+#
+//previous auto unlocked -> iow ex:
+@omega -> alpha6 available immediately etc 
+
+spd 0:Red - L|R       a^A
+spd 1:Org - L|R       a^B
+spd 2:Ylo - L|R       a^A|B...
+dmg 3:Grn - L|R|L|R   a^A
+dmg 4:Aqu - L|R|L|R   a^B
+dmg 5:Trq - L|R|L|R   a^A|B...
+def 6:Blu - R|L       a^A
+def 7:Prp - R|L       a^B
+def 8:Mag - R|L       a^A|B...
+
+aA
+aB
+aAB
+
+1 1 finger up, 1 arm outstreched like hold on Im igorining you while on the phone
+2 shake head, dismissive hand gesturing like get that out of here
+3 dropping boes
+4 hands up close like wtf my watching sports dont like ref nocall penalty etc
+5 arms crossed, head nod like whatsup what you gonna do about it
+6 hands pray head nod low
+7 hands zen meditation chest out head nod up
+8 big clap or mimic b slap: 1 hand goes out, 2nd hand reaches out to clap it
+9 1 arm bicep hi close bring down then back up like yes! gesture 
+
+
+
+std: 1: gry //w0, A1|B1|C1
+core: 2: dark1, light1 //w1, w2, A1|A2|B1|B2|C1|C2
+rare: 2: dark1, light1 //w3, w4, A1|A2|B1|B2|C1|C2
+alpha: 4: dark1, light1, dark2, light2 //w5, w6, w7, w8, A1|A2|A3|B1|B2|B3|C1|C2|C3
+omega: 6: dark1, light1, dark2, light2, dark3, light3 //w9, w10, w11, w12, A1|A2|A3|B1|B2|B3|C1|C2|C3
+
+"m" + 1 + "w" + 0 + _[IDLE|"T"+(1^9)(+CARD)|"A"+(1^3)]|"B"+(1^3)|"C"+(1^3)
+preKS: m1^m3, w0^w4, "T"+(1^6)|"A"+(1^2)]|"B"+(1^2)|"C"+(1^2) //15roles -> 30reqs (2reqs per trait -> 2traits per role) 
+shea|mateo|greg||kayla|||pei|evan|tim|lauren|scott||||jordan
+5colors x 3characters red|ylo|grn|trq|prp
+(eventually 9colors x 4characters) + org|aqu|blu|mag
+colors[0red,1ylo,2grn,3trq,4prp]
+
+
+//req: 0orbs?, bonus values ||trigger:cue behavior|values etc
+//OR -> instead of cue|trigger etc ->
+//earn _resource (like energypotential etc) ->
+//then auto unlock ability once req met etc
+//thus cheaper units can unlock powers quicker than expensive units
+//expensive units unlock more hardcore powers etc
+
+TODO:
+no triangle play ico for tab! -> looks like btn!
+instead perhaps full bar with 3 dots:
+   and then @ swipe new dot = on , old dot = off
+   and perhaps @top corner the icons are displayed like tabs etc  
+      //grayed out though! -> cant look like btns! but they do turn on when at tab etc 
+  @gw -> per (wx * 1) -> display stat|inventory etc
+  
+  main menu layout scenes:
+  a: season
+  b: roster  ->  //@drag: update deck
+              @tap: ba: avatar
+                    bb: traits
+                    bc: custom //(stickers|conveyance|stse gfx|wardrobe)
+                        bca: stickers
+                        bcb: conveyance
+                        bcc: stse gfx
+                        bcd: wardrobe
+                    bd: reqs
+
+//TODO
+each command via __c -> iow 
+ability to log in console [c].addComponent([c]) -> trigger [s] update sequence etc
+
+//TODO -> make this a [c] -> make a [c] that calls 1 of 2 [c] etc iow [c//-.1a] & [c//+1a] etc
+    //ex: spriteDir -> per db[value] -> flipX|false etc
+    //add deploy(move to center screen) w/values & cost, deduct eng, add potential, tiles,
+
+deck option: minion atk -> orb color|formation (1/3)
+
+  @tap playBtn|s -> launch game
+  //update game code etc
+
+
+Depending on side launched and per unit trait values behaviors etc -> different colored orbs per side (same # & same values etc just different color etc)
+//perhaps some have _stat values when launched @  Lside || _color orb side etc
+
+3 elemental specials ex: fire ice water -> ingame increase potential & 1 material etc ->
+must collect enough for all behaviors that have that color as a bonus to unlock the fx etc
+
+& or perhaps more colored orbs of that color etc? thus perhaps 1/9 "elementals" instead of 1/3? etc 
+
+character = avatar & color|item|bounce drop seq
+trait(s) = perk & req options
+loadOut|class = traits + pathTyepBonus&Bogeys & classTypeBonus&Bogeys + engCost
+unit = character + trait(s) + pathTypeBB + classTypeBB 
+  //active|passive|ultimate stats|behaviors|values
+  //(for now){behavior1:move1, behavior2:move2, behavior3:move3}
+  //mix|match behavior|moves = passive req (2/3 behavior|move combo = req set)
+  //super powered version of behavior|move = active|ultimate perk
+per pLoa -> unlocks character potential (star|s)
+  0 star potential: //(@tut1 only)
+    reqA unlocked
+
+  1 star potential:
+    //wht star
+    loadOutAA unlocked: {reqA, perkA, pathTypeBB, classTypeBB, engCost}
+    loadOut = trait|class ex: "General Fear"
+
+  2 star potential:
+    //wht circle, gld star
+    loadOutAB unlocked: {reqA, perkB, pathTypeBB, classTypeBB, engCost}
+    loadOut = trait|class ex: "Yuri Flex"
+
+  3 star potential:
+    //gld rnd square, blk star, wht rhombus
+    loadOutBA unlocked: {reqB, perkA, pathTypeBB, classTypeBB, engCost}
+    loadOutBB unlocked: {reqB, perkB, pathTypeBB, classTypeBB, engCost}
+    loadOut = trait|class ex: "Major Despair"
+    loadOut = trait|class ex: "Will Bauer"
+
+  model:
+  //tiers unlocked via premo OR
+  //when active in deck via units combined earned xp
+    //xp auto accrues via active model(suit)
+    //then xp auto accrues towards inactive(std->core->alpha->omega) etc
+    //can't accrue surplus xp once all owned models are tierMaxed etc
+  1 tier:
+    suit colorA
+  2 tier:
+    suit colorB+//may differ per suit etc -> or have _# colors across the board etc
+  3 tier:
+    spawn gfx (all suit colors)
+    exhaust gfx (all suit colors)
+  4 tier:
+    move1 gfx (all suit colors)
+    move2 gfx (all suit colors)
+    move3 gfx (all suit colors)
+  5 tier:
+    score gfx (all suit colors)
+    emoji|sticker gfx options(perksA|B)
+
+  player options per deck:
+    stats|values|behavior modifiying options:
+      characters // color|item|bounce drop seq
+
+special elemental etc
+
+    visual modifiying options:
+      characters // avatars     
+  player options per character:
+    stats|values|behavior modifiying options:
+      req //passive behavior(move1 & move2)
+      perk //active|ultimate (superpowered move)
+        //thereby affecting => loadout|class //pathTypeBB, classTypeBB
+    visual modifying options:
+      suit //rarity(std|core|alpha|omega),color(A|B+)
+      conveyance gfx //hoverboard skin variant
+      perk gfx //emoji|sticker gfx variant
+  [#][#][#][### ### ###]
+  //playerName|loa|zone|tag(~banner but on wall)(icon|s(^3)|rotation|color|s)
+
+  [##] [#][##][#][###][###][###][###][###][###]  [###] [###][##]  [###]
+  //character: img(avatar) + color|item|bounce drop seq
+  //model(rarity|version|color|spawnTier|Sticker|exhaustTier|Sticker|scoreTier|Sticker): img & sticker gfx
+    //unit: img
+  //req: passive stats(vals|behavior) & img (move1|2)
+  //perk|gfx: active|ultimate behavior|vals & img(move|sticker)
+    //traits: loadout|classType -> traitTypeBonus|Bogey, pathTypeBonus|Bogey
+  //hb: img
+
+  //~avg suit + (colorSet, stsxA|(B|(C))) tier skip cost via $premo:
+  std: 5, tier: .50 (x2 = 1) = 6
+  core: 7, tier: .75 (x6 = 4.50) = 11.50
+  rare: 10, tier: 1 (x6 = 6) = 16
+  alpha: 12.50, tier: 1.25 (x10 = 12.50) = 25
+  omega: 15, tier: 1.5 (x10 = 15) = 30
+  //omega ex: in shop marketed as slashed from 20, on sale for 15 etc
+  //fortnite Battle Pass variant (~$10/90days, 100tiers @$1^1.50/tierSkip =10 battleStars(xp))
+  //free & paid version w/weekly set of daily challenges including 2x xp if using certain character|outfit etc
+  //new suits in each shop unlocked via zones -> no std suits except for when 1st get character etc
+
+  for economy purposes:
+  tiers 
+
+KS
+//5 model suits can be redeemed via special currency token that supporters can use in the in game shop
+//thus each player can purchase own desired avatars
+$1    preSeason Omega Pass:
+$20   preSeason VIP (Alpha & Omega) Pass:  (5 std)
+$35   preSeason VIP (Alpha & Omega) Pass:  (5 std) + 5 core
+$60   preSeason VIP (Alpha & Omega) Pass:  (5 std) + 5 rare  + $premo
+$99   preSeason VIP (Alpha & Omega) Pass:  (5 std) + 5 alpha + $premo
+$120  preSeason VIP (Alpha & Omega) Pass:  (5 std) + 5 omega + $premo
+TODO:// instead of 4 core, give player 1 (high rarity) + more common etc
+reward tier bonuses:
+conveyances(rarity, conveyance, colors) ^x__
+tags(tag, colors|rotation) ^x__
+sticker(sticker, colors|rotation) ^x__
+Season 1 Pass
+bonus reward tier bonuses:
+model|suits(rarity) ^ maxModels|rarities available
+
+  std|core|rare|alpha|omega conveyances (auto|0.25|0.50|0.75|1)
+
+  battle pass (sets of 20) reward tiers:
+  1 characterSuit (seasonal + std(stsxA)|core(stsxA|B)|rare(stsxA|B)|alpha(stsxA|B|C)|omega(stsxA|B|C))
+    //thus only way to unlock tiers is via battlePass etc (dont need to have character in deck etc)
+  2 suitColorSetA
+  3 suitColorSetB
+  4 stsx: spawnAltB (A:auto)
+  5 stsx: teleportAltB (A:auto)
+  6 stsx: scoreAltB (A:auto)
+  7 stsx: exhaustAltB (A:auto)
+  8 stsx: spawnAltC || sticker
+  9 stsx: teleportAltC || stickerColors|Rotation
+  10 stsx: scoreAltC || tag
+  11 stsx: exhaustAltC || tagColors|Rotation
+  12 conveyance (seasonal + std|core|rare|alpha|omega) || conveyanceTokens
+  13 conveyanceColors || conveyanceTokens
+  14 sticker || sticker|tagTokens
+  15 stickerColors|Rotation || sticker|tagTokens
+  16 tag || sticker|tagTokens
+  17 tagColors|Rotation || sticker|tagTokens
+  18 bonus xp
+  19 bonus xp
+  20 bonus xp || $premo
+  //while completing challenges to unlock tiers, also earn xp -> unlock tiers of avatar(suits(colors, stsx)) & conveyance(colors|titles)
+  //season (start|mid|end) ranking -> is how to unlock new|next zone|s (during & @seasonEnd)
+  //perhaps 3 zone "arenas" per season & during quickmatch -> picks random zone arena from prior seasons etc 
+  //each zone has path trait type bonus|bogeys etc 
+
+  perhaps rewards auto adjust to player: per model(suit(colors. stsx), conveyance(colors)) & xp
+  stickers|tags(colors), 
+
+pregame warm ups //randomly chosen (from available unlocked) character pump up gfx etc
+
+"character trait" = behaviors = move set & stat values
+iow: "talking on the phone" move = close range => dmg (stat value) per character
+            //(& triggers (iow vsTraitType, xL etc))
+several characters could have a "talking on the phone" move, with different TRIGGERS & VALUES 
+//perhaps rotating orbs color & spd => indicate character type 
+//eventualy 5 sets of 9 models|avatars => 
+//perhaps each move = 1^3 colored orbs (dir + spd)
+//perhaps different colors @ same time?
+
+@start character equipped w/ 2 moves (chosen @ meta)
+  //ex: trait perk: _ dmg bonus vs _type & spd bonus @ _ path
+  character req: dmg bonus @ _ path & dmg bonus when carying orb
+  //player chooses 2 perks: 
+      long range atk hi dmg vs _types
+      long range med dmg, synergy w _characters & mindbomb
+  //eventually unlocks ^ 9 moves per character etc -> in sets of 3 ~= (close|mid|far) later synergy bonuses via elemental? etc
+  //character will have some of the same move gfx, but different TRIGGERS & VALUES //similar to sharing with another character
+  however -> 1 orb spins forward vs 1 orb spin backward & color per character type" || 2 spin opposite etc
+same number = same move gfx, different TRIGGERS & VALUES
+C1: 1 2 3       7       11        7   11  7   11
+C2: 1     4 5     8       12      8   12  8   12
+C3:   2   4   6     9       13    9   13  9   13
+C4      3   5 6       10      14  10  14  10  14
+1 1 
+2 2 
+3 3 
+4 4 
+5 5
+6 6
+7 7 7
+8 8 8
+9 9 9
+10  10  10
+11  11  11 //@S3 
+12  12  12 //@S3
+13  13  13 //@S3
+14  14  14 //@S3
+orb color per trait type
+1spin: 360 | 1spin: -360 | 2spin: 360|-360
+//ex: 
+std:  6 moves per 4 character types = 10 moves total + 4 stsx = 10 gfx total
+core: 6 moves per 4 character types = 10 moves total + 8 stsx = 18 gfx total
+rare: 6 moves per 4 character types = 10 moves total + 8 stsx = 18 gfx total
+alpha: 6 moves per 4 character types = 10 moves total + 12 stsx = 22 gfx total
+omega: 6 moves per 4 character types = 10 moves total + 12 stsx = 22 gfx total
+//eventually unlock ^ 9 moves per character etc @season3 etc
+FOR NOW: 6 moves => 10 moves total => 4 characters per model -> 1^3x stsx gfx = 10|18|18|22|22 per std|core|rare|alpha|omega set
+
+  //each character trait suit unlocks the matching tier move set
+  iow trait suit tier 3 unlocks tier 3 move set even if character has unlocked a higher tier|more moves 
+
+tut(characters|cards)
+1: 2v2|4, 2: 3v3|6, 3: 4v4|8 -> then unlocks 5v5|10 @ tut completion
+
+perhaps Champion -> Guardian -> Prodigy -> Renegade -> Engima
+type:         CHAMPION      GUARDIAN    PRODIGY     RENEGADE    ENIGMA 
+dmg:          hi&close      lo&close    hi&close    hi&far      hi&far
+delay:        reg           slow        reg         fast        reg
+target:       solo          multi       solo        solo        multi
+hp:           md            hi          lo          lo          lo
+spd:          reg           slow        fast        reg         slow
+mindbomb:     no            no          yes         yes         yes
+scoreBonus:   no            yes         no          no          yes
+
+victory condition:
+score 100% victory pts(vPts) vs foe
+how to score:
+score vPts when playerAI creeps enter foe's comfort zone(base)
+score vPts via player unit enters foe's comfort zone(base)
+earn more pts when player unit is carrying an orb//various ScoreBonuses per character per move per amt of orbs etc
+
+orbs: spawn @start & every 20s (3mins=9)
+creeps:
+@start wave1: 1 xL mid lane @10s -> every 10s mid lane x5 (all units)
+@100s wave2: (default) 1 xL mid lane @120s -> every 5s 1 xL top & btm lanes x2 (all units)  
+//perhaps player choice of last wave formation? iow 1|2|2 OR 2|1|2 OR 2|2|1
+all creeps use same base hp|dmg|range|spd (just look different per units chosen etc)
+an exhausted creep triggers a new orb to be spawned in player's comfort zone (home base)
+
+//perhaps @hand -> can "burn|delete" card for _cost to free up space in deck for next card 
+//this is done via dragging card above top row //above top row! not "on top row" -> that will just cancel it instead etc
+
+//pulse aura (& color per >50%, >20%, <20%) indicates hp 
+//orb rocket size indicates how much dmg (spd variable per move? or same as unit? etc)      
+//spawning|teleporting|exhaustion|scoring have customizable gfx & emoji|sticker
+gfx are per model (iow avatar) per suit(colors included)
+Does not apply to same model in different suit!
+//thus to encourage economy, different currency to purchase stickers|tags & conveyances than to purchase suits
+//all suits have tiers -> that auto unlock stsx gfx options -> or can pay currency to skip
+thus only way to unlock next tier for those objects is to use that particular object tier token -> 
+iow xp only used to unlock suit tiers, object tier tokens only way to unlock object etc
+iow tag|sticker & conveyance tier skip currency = only thing player can do w/ that particular currency so makes it more valuable
+thus:   $ ->  $premo ->  shop(traitSuit|s, conveyanceTokens, sticker|tagTokens)
+                            conveyanceTokens -> shop(conveyance|s) //priorSeason|s|exclusive conveyances etc (unavailable thru seasonPass)
+                            conveyanceTokens -> unlock conveyance tiers
+                            sticker|tagTokens -> shop(sticker|s|tag|s) //priorSeason|s|exclusive stickers|tags etc (unavailable thru seasonPass)
+                            sticker|tagTokens -> unlock sticker|tag tiers
+        $ ->  $premo ->  season pass (unlocks challenges that on completion unlock ^^)
+        $ ->  $premo (instant unlock suit|xp tiers) || xp (upon challenge completion via playing unlock suit xp tier)
+
+
+early access = preseason
+stsx = spawn|teleport|score|exhaust (3 stsx gfx sets per each suit per avatar)
+  //"moves" are final -> player chooses avatar -> 
+      character (general fear, strong|weakVs etc) -> 
+          trait set (behaviors & values) //moves may be shared between characters but values may differ
+  //"styles" are customizable -> player chooses avatar ->
+      traitSuit (rarity level, & per tier unlocks: color) -> 
+          stsx gfx set (per traitSuit per avatar per tier unlocks)
+          sticker set (emotes, emojis, icons, per tier unlocks: color) -> per season pass tier?
+          conveyance (per tier unlocks: color) -> per season pass tier? 
+
+traitSuits(colors, stsx gfx sets), stickers(colors) ->
+      tiered -> unlocked via  
+
+in shop goods:
+  core|rare|alpha|omega modelSuits (tiered) //std auto comes with character
+  std|core|rare|alpha|omega hbs (auto|0.25|0.50|0.75|1)
+perhaps SEASON RENTAL of hoverboard -> iow consumbale good that lasts duration of season (can only be equipped to 1 unit at a time)
+unlockable conveyances(colors) via tiers, also titles "new", "trusty", "lucky", "rideOrExhaust" etc
+//perhaps unadverstised -> if player upgrades|unlocks conveyance to _ tier before the season ends -> gets to keep the board
+
+
+trait values:
+  engCost //resolve
+  orbs (maxCarry)
+  hp (base, bonus|bogeys, max, now) //power
+  modMax //itemMax = 3
+  //per rowSet @TOP|@BTM:
+    spd (base, bonus|bogeys) //bonus|bogeys include: +/-classType per pathType & item drops & if orbCarry etc
+    range (base, bonus|bogeys, max, now) //influence
+    brake (base, bonus|bogeys, max, now) //mobility
+    dmg (base, bonus|bogeys, max, now) //impact
+    targets (solo, dual) //solo @row:same, dual @top:top|mid, @btm:mid|btm, @mid:top|btm    
+    cooldown // delay between sets of waves
+    wave // set of bursts
+    agi // delay between sets of bursts    
+    burst // rocketLaunch
+    onExhaust mindBomb (T|F, range(rows,cols))
+    BTM|TOP portal Destiny: BTM->TOP, TOP->BTM, TOP->TOP, BTM->BTM
+
+TODO: spreadsheet of min|max avg stats etc, figure out if how much 1 item = 25% of avg|max|self? bonus|bogey etc
+TODO: add flash whtIn|Out a couple of times to ebar @deploy  
+
+triggers:
+  classType (&pathType) //@dmgResist | @spd
+  xL <=3|>=3 //@spawn
+  p1|p2 score @ xL, <|=|> //@spawn
+  hp >=80|<=80|>=50|<=50|>=20|<=20 //@foeDmg|rocketLaunch, @range|brake, @cooldown, @targets, @spd 
+  orbCary 0|1|max //@foeDmg|rocketLaunch, @dmgResist, @spd, @targets, @range|brake, @cooldown
+  rowSet @TOP|@BTM //@spawn, @portal
+  color item bonus|bogey per classType etc //@itemEquip
+
+  @spawn {@xL, @p1|p2score}
+  @onEnter {hp|orb|row: @range|brake, @targets, @cooldown, @spd, @foeDmg, @portal}
+  @onDmg {hp|orb|row: @dmgResist}
+  @itemEquip
+
+  Crafty.c("BASE",{
+    init:function(){
+      let baseVals = {
+        orbMax: 3,
+        modMax: 3, //items=mods
+        //per rowSet @TOP|@BTM:
+        //bb +/-classType per pathType & item drops & if orbCarry etc
+        hp: {base: , bonus: 0, bogus: 0, max, now }
+        spd: {base: , bonus: 0, bogus: 0, max, now }
+        range: {base: , bonus: 0, bogus: 0, max, now }
+        mobility: {base: , bonus: 0, bogus: 0, max, now }//brake
+        dmg: {base: , bonus: 0, bogus: 0, max, now }
+        targets: {dual:T|F} //solo @row:same, dual @top:top|mid, @btm:mid|btm, @mid:top|btm    
+        cooldown: {dur, count}
+        wave: {max, now}
+        agi: {dur, count}
+        burst: {rockets:}
+        onExhaust: {mindbomb:T|F, rows: , cols: }
+        onPortal: {destfromBtm: destfromTop:} BTM->TOP, TOP->BTM, TOP->TOP, BTM->BTM
+      }
+      this.base = baseVals;
+      return this;
+    }
+  });
+  //then -> can add Crafty components to adj each val per loadout req etc
+  ////& perk & behavior(vals+/-) triggers etc
+
+// then call components via [#] etc 
+
+//TODO: side wager option: (none|1/2|all) of xp to be won (perhaps earn|grow limits 1/day , eventually max 7/day? etc)
+
+TODO: SET_REQ|S
+perhaps each "reqHook" (@xL, onEnter, onPorted etc..) => req{1:[],2:[],...},
+perhaps update fx -> thus if unit has more than 1 timer etc
+  //also so each # can have 1 prop etc ex: 10:timer, 11:x, 12:y, 13:w, 14:h, 15:z, 16:a, 17:rotate etc...
+ if (cArg.cba.req[1].length) {//ex:reqs@xL
+  for (let i = cArg.cba.req.[1]length - 1; i >= 0; i--) { 
+    cArg.cba.req[i](cArg.cba);
+    }
+  }
+
+  thus fx => fx[1] etc
+   ex: fx[1] = [[fn],[fn],..] OR? [fn,fn,...] etc
+   then fxArray.push(fn) if count etc || if @cArg reset count etc?,
+   then fx[1] = fxArray etc 
+
+   OR perhaps via components..
+
+Crafty.c("FX10",{
+  init:function(){
+    this._fx[10]=[];
+    this._fx[10].add = function(fxFun){this._fx[10].push(fxFun);}
+  },
+});
+
+TODO: 
+setREQ|s: hp|range|dmg
+add reqHooks @ correct places
+loadouts: reqType & pathpref
+
+target|range|mobility -> move|portal
+burst wave agi delay gfx fx sprite
+  launchRocket|s, dmg|hp etc  onHit, onDmg, onExhaust etc
+
+mindbombs req[]
+collect|carry|equip items|orbs
+character color item bounce drop seq
+dropItems|orbs
+
+scoreOrbs
+extend xL tiles
+2x energy
+victory conditions
+results screen
+
+
+You should probably go for a data-driven design here.
+
+Make a generic Attack class which contains the parameters you want to work with - base damage, which stats affects the damage, a set of potential status effects... stuff like that:
+
+public enum AttackStat
+{
+  Strength,
+  Agility,
+  Intellect
+  // etc.
+}
+
+public class Attack
+{    
+  private int baseDamage;
+  private AttackStat stat;
+  private double damageMultiplier;
+  // ...and so on
+
+  public void Attack(Character attacker, Character defender)
+  {
+    defender.DoDamage(baseDamage + attacker.GetStatValue(stat) * damageMultiplier);
+  }    
+}
+
+// Put a method on Character to fetch the appropriate value given an AttackStat:
+public int GetStatValue(AttackStat s)
+{
+  switch(s)
+  {
+    case AttackStat.Strength:
+      return strength;
+    case AttackStat.Agility:
+      return agility;
+    // etc.
+  }
+}
+Then, place your attacks in a file, e.g. an XML file, and load the data from there:
+
+<Attacks>
+  <Attack name="Sword Slash" damage="10" stat="Strength" multiplier="1" />
+  <!-- More attacks here -->
+</Attacks>
+You could even extend this to draw values from multiple stats, say, a Fireball where the damage is calculated from both an Intellect and a Fire stat:
+
+<Attack name="Fireball" damage="20">
+  <StatModifier stat="Intellect" multiplier="0.4" />
+  <StatModifier stat="Fire" multiplier="0.8" />
+</Attack>
+If you don't want to use the same basic damage formula for everything (e.g. calculate magic damage differently from physical damage), create subclasses of Attack for each formula you need and override Attack, and specify which type you want in your XML file.
+
+1
++1, but I would even replace GetStatValue with a lookup table of some sort to avoid maintaining that switch statement. – user744 Nov 16 '10 at 11:41
+1
+The problem with this method is that you can only have generic data-driven attacks - you can't have anything that uses special logic. You will end up with a very generic set of items (as you get in warcraft – Iain Nov 16 '10 at 12:28
+2
+@Iain: That is very easily solved by simply adding more data to allow this. E.g., you might have a SpecialAttack subclass which does more things, or calculates damage in an entirely different way. It's just a matter of identifying the behavior you need, and then expressing that as data. – Michael Madsen Nov 16 '10 at 13:13 
+2
+@Iain: In addition to just adding more fields, you can also solve that by some of the data fields being expressions or code blocks in e.g. Lua. Good use of orthogonal components also makes more interesting results. – user744 Nov 16 '10 at 13:44 
+1
++1 for the general idea of being data-driven. I don't agree with suggesting xml. There are better formats out there - yaml, json or a plain .lua file if you are embedding Lua. – egarcia Jan 7 '11 at 15:42
+1
+In olden times (MUD/MUSH) these little scripts were called "procs" because they would get processed when the item was used. – Patrick Hughes May 2 '13 at 16:03
+
+
+One obvious idea would be to just create a CombatStatComponent that has all your stats. This could include the base stats an avatar can have, the extra stats they can acquire possibly from gear, resistence levels the avatar presently has. The combat system uses this components data to measure the damage possible between two entities when an attack is made. When the attack occurs, an event gets sent to the damaged entity with the damage done. It simply modifies it's health component's value.
+
+
+
+Coming back to ECS. It is quite well-known in the game design and development circle. Imagine the Street Fighter-style fighting game where you select a character to play against the other side. The entity is an empty skeleton of a human (or unhuman) fighter which may owns a set of simple behaviors like punching, kicking, or jumping and a property like the HP (Health Point). The character you choose is actually a set of predefined components / behaviors which can be applied and enhance the entities. For instance, a Chun-Li component can modify a base entity’s jump behavior to become unique to Chun-Li, add Spinning-bird Kick move, and of course, apply the texture of the character. These components can also interact with other components i.e. Spinning-bird Kick can have a default damage of -5 HP, but when interact with an entity with a Psycho Crusher component, it can inflict a humble -1 HP.
+
+
+
+The Stats
+
+BladeQuest is aimed at being an homage to classic turn-based RPG’s so the basic statistics follow a pretty simplified form that has been present in some way or another in every RPG created since Dungeons and Dragons.
+
+Strength - How much damage you do with physical attacks
+
+Vitality - How much health you have an how much physical damage is mitigated.
+
+Intelligence - How often you can cast spells (MP), how much damage you do with magical attacks, and how much magical damage is mitigated (combined strength and vitality for magic)
+
+Agility - Determines the likelihood of dodging or blocking attacks and also determines turn order, i.e., faster characters will act first in a turn.
+
+From these stats, a series of other, often-hidden statistics are derived.  These include Max HP, Max MP, Battle Power, Defense, Magic Power, Magic Defense, Speed, evade chance, and block chance.
+
+The important thing to keep in mind is isolating how many of these stats are bases and how many are derived.  With this model, all stats come from the 4 basics, so by modifying the 4 bases, all other aspects of the character change in suit accordingly.  Doing this really helps simplify the system!
+
+Increasing Stats
+
+As your characters level up, their stats need to go up accordingly.  This needs to happen in such a way as to make sure that the different characters who excel in different aspects of battle remain unique by the time the max level has been reached.  This sounds very intuitive and simple but when you dig into it, it gets very complex.
+
+The first thing I decided would need to take place is setting an upper cap for the stats.  If I know that the perfect character will have these stats and the worst will have these other stats, it narrows the scope of possibilities.  In tribute to the base-2 compact-memory usage of old-school games, I chose 255, the highest integer that can be fit into a single byte.
+
+From there, I borrowed a very simple and nice concept for stat growth from the Pokemon series.  Pokemon each have their current stats but then they have hidden base stats.  The base stats determine what the Pokemon’s stat values will be at when they reach the highest level, in my case, 99.
+
+So while there are derived stats reading from the 4 basic stats of our characters, each of those 4 are directly calculated based on level and base stat.  This ends up creating a system wherein, after the base stats are defined, all stats for the character become strictly based on character level.  This makes for a very simple and easy-to-understand base stat model.
+
+Here’s an example:
+
+My thief character, Aramis, inherently has a very high agility stat.  He needs to go first to steal items and this allows him to save characters with items before enemies attack.  His low health and defense is compensated by it being more difficult for enemies to hit him due to a higher evade chance.  So I’ll give Aramis a base Agility of 255, the maximum.
+
+This means that when Aramis is level 99, he will have 255 agility, and from there it is simple to deduce what his Agility will be in earlier levels.  For every level he has, he will have one 99th of his base stat:
+
+Agility = Level * (99 / baseAgility)
+
+Level 5: 13 Agility
+Level 25: 64 Agility
+Level 90: 232 Agility
+Level 99: 255 Agility
+
+To further simplify this system, I rate every character’s stats from a 1 to 10.  Each point being worth 25.5 of a base stat. 
+
+So Aramis may be something Like this:
+Str: 7; Agi: 10; Vit: 3; Int: 1
+
+But Joy, a magic-based character may be more something like:
+Str: 1; Agi: 5; Vit: 6; Int: 10
+
+And Carl, our mech-riding tank character may look like:
+Str: 8; Agi:1; Vit: 10; Int: 5;
+
+By now you should see how a fully realized and complex character with defense, attack power, evade chances, and health is defined by a simple 4 values range 1 to 10.  For my system I found that a vastly simplified start point that drives all other values is the most effective way of modeling my characters.
+
+
+https://www.rpgmakercentral.com/topic/36290-damage-formulas-101-mv-edition/
+
+
+https://www.gamedev.net/forums/topic/317594-rpg-damage-calculation-formula/
+
+
+https://www.daniweb.com/programming/game-development/threads/104617/rpg-battle-algorithms
+
+
+https://gamedevelopment.tutsplus.com/articles/balancing-turn-based-rpgs-the-big-picture--gamedev-8286
+
+
+Game_Interpreter.prototype.operateVariable = function (variableId, operationType, value) {
+  try {
+    var oldValue = $gameVariables.value(variableId);
+    switch (operationType) {
+      case 0: // Set
+        $gameVariables.setValue(variableId, oldValue = value);
+        break;
+      case 1: // Add
+        $gameVariables.setValue(variableId, oldValue + value);
+        break;
+      case 2: // Sub
+        $gameVariables.setValue(variableId, oldValue - value);
+        break;
+      case 3: // Mul
+        $gameVariables.setValue(variableId, oldValue * value);
+        break;
+      case 4: // Div
+        $gameVariables.setValue(variableId, oldValue / value);
+        break;
+      case 5: // Mod
+        $gameVariables.setValue(variableId, oldValue % value);
+        break;
+    }
+  } catch (e) {
+    $gameVariables.setValue(variableId, 0);
+  }
+};
+
+
+function Game_Switches() {
+  this.initialize.apply(this, arguments);
+}
+
+Game_Switches.prototype.initialize = function () {
+  this.clear();
+};
+
+Game_Switches.prototype.clear = function () {
+  this._data = [];
+};
+
+Game_Switches.prototype.value = function (switchId) {
+  return !!this._data[switchId];
+};
+
+Game_Switches.prototype.setValue = function (switchId, value) {
+  if (switchId > 0 && switchId < $dataSystem.switches.length) {
+    this._data[switchId] = value;
+    this.onChange();
+  }
+};
+
+Game_Switches.prototype.onChange = function () {
+  $gameMap.requestRefresh();
+};
+
+//-----------------------------------------------------------------------------
+// Game_Variables
+//
+// The game object class for variables.
+
+function Game_Variables() {
+  this.initialize.apply(this, arguments);
+}
+
+Game_Variables.prototype.initialize = function () {
+  this.clear();
+};
+
+Game_Variables.prototype.clear = function () {
+  this._data = [];
+};
+
+Game_Variables.prototype.value = function (variableId) {
+  return this._data[variableId] || 0;
+};
+
+Game_Variables.prototype.setValue = function (variableId, value) {
+  if (variableId > 0 && variableId < $dataSystem.variables.length) {
+    if (typeof value === 'number') {
+      value = Math.floor(value);
+    }
+    this._data[variableId] = value;
+    this.onChange();
+  }
+};
+
+Game_Variables.prototype.onChange = function () {
+  $gameMap.requestRefresh();
+};
+
+//-----------------------------------------------------------------------------
+// Game_SelfSwitches
+//
+// The game object class for self switches.
+
+function Game_SelfSwitches() {
+  this.initialize.apply(this, arguments);
+}
+
+Game_SelfSwitches.prototype.initialize = function () {
+  this.clear();
+};
+
+Game_SelfSwitches.prototype.clear = function () {
+  this._data = {};
+};
+
+Game_SelfSwitches.prototype.value = function (key) {
+  return !!this._data[key];
+};
+
+Game_SelfSwitches.prototype.setValue = function (key, value) {
+  if (value) {
+    this._data[key] = true;
+  } else {
+    delete this._data[key];
+  }
+  this.onChange();
+};
+
+Game_SelfSwitches.prototype.onChange = function () {
+  $gameMap.requestRefresh();
+};
+
+
+unit that only atks foes carrying orbs
+else moves out of the way (vertical -> to btm if @ btm, to top if @ top)
+perhaps hi spd lo hp units do the same etc -> iow try to evade atkrs etc
+thus, with vertical move ability -> mid = splash:(triple:all), edge = splash:(dual:only same edge + mid), else solo(same lane etc)
+comfortZone (btm) hi|endZone? etc(top) etc
+
+
+HP -> displayed onscreen via pulse -> 100% = wht circle & size = relative to amt of hp
+<=20%hp -> "" 20% of size etc + red etc
+
+similar to rockets:
+1 tile = 100hp etc//or whatever base line standard etc
+thus 200hp base dmg rocket = 2x size = 2 tiles w x w tiles h etc
+onHit|dmg -> expands|contracts per dmg done 
+thus -> if more than size represented -> gets bigger, else gets smaller 
+& fades out etc
+ex: 100 hp base dmg -> = 1 tile wxh -> does 150 dmg onHit -> expands to 1.5wxh etc
+ex: 200 hp base dmg -> = 2 tile wxh -> does 50 dmg onHit -> contracts to .5xwh etc 
+
+
+TODO: update deck|foe|ai -> decks|traits
+      update base -> decks|traits 
+      update move|portal [s] -> decks|traits  
+      create range|atk|hp gfx|rocket gfx|dmg|exhaust [s] -> decks|traits
+
+      orbs [s] //spawn|collect|drop|score
+      items //drop|collect|dropSeq per model|avatar
+      perksnreq //triggers|behaviors|etc
+
+      main menu //3top colors|1btm color => sU|sD
+                //shop, events, season, cards, model
+                //prp, ylo, grn, trq, gry|variable? etc || prp|org|ylo|grn|trq etc?
+
+
+
+class Person {
+    constructor(name) {
+        var _name = name
+        this.setName = function(name) { _name = name; }
+        this.getName = function() { return _name; }
+    }
+}
+
+module.exports = createFunkyParser
+function createFunkyParser (opt) {
+  // optional params
+  opt = opt || {}
+  
+  // private data
+  var foo = opt.foo || 'default'
+  
+  // API/data for end-user
+  return {
+    foo: foo,
+    ...
+  }
+  
+  // private functions
+  function parse () {
+    ...
+  }
+}
+
+var parser = require('funky-parser')({ foo: 'bar' })
+console.log(parser.foo)
